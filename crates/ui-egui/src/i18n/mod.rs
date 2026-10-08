@@ -258,10 +258,21 @@ pub fn sync_context(ctx: &egui::Context, language: &str) {
     let changed = ctx.data(|data| data.get_temp::<Lang>(id) != Some(lang));
     if changed {
         ctx.data_mut(|data| data.insert_temp(id, lang));
+        sync_document_language(lang);
         crate::theme::install_fonts(ctx);
         ctx.request_repaint();
     }
 }
+
+#[cfg(target_arch = "wasm32")]
+fn sync_document_language(lang: Lang) {
+    if let Some(root) = web_sys::window().and_then(|window| window.document()).and_then(|document| document.document_element()) {
+        let _ = root.set_attribute("lang", lang.code());
+    }
+}
+
+#[cfg(not(target_arch = "wasm32"))]
+fn sync_document_language(_: Lang) {}
 
 /// Does `lang` have a catalog entry for this plain string? (English never does: it is the source.)
 pub fn has(lang: Lang, s: &str) -> bool {
