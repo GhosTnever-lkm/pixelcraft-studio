@@ -37,9 +37,9 @@ fn bounded_tags(tags: impl IntoIterator<Item = String>) -> Vec<String> {
 }
 
 #[cfg(any(target_arch = "wasm32", test))]
-fn browser_tags(languages: impl IntoIterator<Item = String>, fallback: String) -> Vec<String> {
+fn browser_tags(languages: impl IntoIterator<Item = String>, fallback: Option<String>) -> Vec<String> {
     let tags = bounded_tags(languages);
-    if tags.is_empty() { bounded_tags([fallback]) } else { tags }
+    if tags.is_empty() { bounded_tags(fallback) } else { tags }
 }
 
 #[cfg(not(target_arch = "wasm32"))]
@@ -63,10 +63,7 @@ fn detect_system_tags() -> Vec<String> {
     // Prefer the full ordered list (e.g. `ru-RU`, then `en-US`), and fall back to
     // `language` for browsers that do not expose `languages`. Unsupported tags are skipped by
     // `resolve`, so a user's next supported language can still be selected.
-    browser_tags(
-        navigator.languages().iter().filter_map(|language| language.as_string()),
-        navigator.language(),
-    )
+    browser_tags(navigator.languages().iter().filter_map(|language| language.as_string()), navigator.language())
 }
 
 #[cfg(test)]
@@ -125,9 +122,10 @@ mod tests {
 
     #[test]
     fn ordered_language_preferences_skip_unsupported_tags() {
-        let tags = browser_tags(["xx-XX".into(), "ru-RU".into(), "en-US".into()], "en-US".into());
+        let tags = browser_tags(["xx-XX".into(), "ru-RU".into(), "en-US".into()], Some("en-US".into()));
         assert_eq!(resolve(&tags).code(), "ru");
-        assert_eq!(browser_tags(Vec::<String>::new(), "ru-RU".into()), ["ru-RU"]);
+        assert_eq!(browser_tags(Vec::<String>::new(), Some("ru-RU".into())), ["ru-RU"]);
+        assert!(browser_tags(Vec::<String>::new(), None).is_empty());
     }
 
     #[cfg(not(target_arch = "wasm32"))]
