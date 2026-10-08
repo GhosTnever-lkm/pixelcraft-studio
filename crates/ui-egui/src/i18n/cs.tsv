@@ -2126,3 +2126,10 @@ cameraRaw	Color	Barvy
 	% of all commits	% všech commitů
 	Lines +/−	Řádky +/−
 	@{login}: {prs} PRs, {commits} commits, +{added} / −{deleted} lines (Δ {delta}), +{binAdded} / −{binDeleted} binary assets, {first} – {last}	@{login}: PR: {prs}, commity: {commits}, řádky +{added} / −{deleted} (Δ {delta}), binární soubory +{binAdded} / −{binDeleted}, {first} – {last}
+	Original PhotoCraft project	Исходный проект PhotoCraft
+	Live browser demo	Демо в браузере
+	Community fork on GitHub	Форк сообщества на GitHub
+	Original project	Original project
+	Browser demo	Browser demo
+	This fork	This fork
+	Open the community fork on GitHub	Открыть форк сообщества на GitHub

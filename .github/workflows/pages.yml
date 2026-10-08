@@ -1,0 +1,70 @@
+name: Publish browser editor
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "apps/photocraft-web/**"
+      - "crates/**"
+      - "Cargo.toml"
+      - "Cargo.lock"
+      - "xtask/**"
+      - "packaging/web/**"
+      - ".github/workflows/pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32-unknown-unknown
+      - uses: Swatinem/rust-cache@v2
+        with:
+          key: web-pages
+      - name: Install Trunk
+        run: cargo install trunk --version 0.21.14 --locked
+      - name: Build browser editor
+        working-directory: apps/photocraft-web
+        run: trunk build --release
+      - name: Check static-site paths and WebAssembly size
+        shell: bash
+        run: |
+          set -euo pipefail
+          if grep -Eq '(src|href)="/[^/]' dist/web/index.html; then
+            echo "The generated index uses root-absolute paths and will fail under the GitHub Pages prefix." >&2
+            exit 1
+          fi
+          wasm_file=$(find dist/web -maxdepth 1 -type f -name '*.wasm' -print -quit)
+          test -n "$wasm_file"
+          wasm_size=$(wc -c < "$wasm_file")
+          echo "WebAssembly size: ${wasm_size} bytes"
+          if [ "$wasm_size" -gt 25165824 ]; then
+            echo "WebAssembly file exceeds the 24 MiB hosting safety limit." >&2
+            exit 1
+          fi
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: dist/web
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

@@ -350,14 +350,14 @@ pub fn title_bar(app: &mut PhotocraftApp, ui: &mut egui::Ui) {
                             let next = app.ui.theme.next();
                             app.set_theme(ui.ctx(), next);
                         }
-                        // Always one click away: the community Discord.
-                        let discord = egui::Button::image_and_text(
+                        // Always one click away: the community fork.
+                        let community = egui::Button::image_and_text(
                             icons::image("message-square", 14.0, t.text_dim),
-                            egui::RichText::new(tl!("Discord")).color(t.text_dim).size(12.0),
+                            egui::RichText::new(tl!("Community")).color(t.text_dim).size(12.0),
                         )
                         .frame(false);
-                        if ui.add(discord).on_hover_text(format!("Join the ArtCraft Discord ({})", crate::links::DISCORD)).clicked() {
-                            crate::links::open(app, ui.ctx(), crate::links::DISCORD);
+                        if ui.add(community).on_hover_text(tl!("Open the community fork on GitHub")).clicked() {
+                            crate::links::open(app, ui.ctx(), crate::links::GITHUB);
                         }
                         ui.min_rect().left()
                     })

@@ -2198,3 +2198,10 @@ cameraRaw	Amount	Cantidad
 	% of all commits	% de todos los commits
 	Lines +/−	Líneas +/−
 	@{login}: {prs} PRs, {commits} commits, +{added} / −{deleted} lines (Δ {delta}), +{binAdded} / −{binDeleted} binary assets, {first} – {last}	@{login}: {prs} PR, {commits} commits, +{added} / −{deleted} líneas (Δ {delta}), +{binAdded} / −{binDeleted} archivos binarios, {first} – {last}
+	Original PhotoCraft project	Исходный проект PhotoCraft
+	Live browser demo	Демо в браузере
+	Community fork on GitHub	Форк сообщества на GitHub
+	Original project	Original project
+	Browser demo	Browser demo
+	This fork	This fork
+	Open the community fork on GitHub	Открыть форк сообщества на GitHub
