@@ -2,6 +2,16 @@
 
 Notable changes to PixelCraft Studio Community Edition are recorded here.
 
+## 0.5.0 — 2026-10-08
+
+Integrate the latest PhotoCraft upstream editor improvements into this attributed community fork.
+
+- Add Direct Selection path editing and cross-document layer transfer.
+- Convert Smart Objects into editable layers.
+- Improve image filter fidelity, gradient glows, export slices, masks and long-menu behavior.
+- Improve custom title-bar behavior and add regression coverage for core editing operations.
+- Keep upstream authorship, license and asset notices visible in the fork attribution records.
+
 ## 0.4.0 — 2026-10-08
 
 This version improves the browser distribution of the PhotoCraft-based editor. It does not add
