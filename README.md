@@ -6,6 +6,8 @@
 
 **[Открыть браузерный редактор](https://ghostnever-lkm.github.io/pixelcraft-studio/)** · [Исходный репозиторий](https://github.com/storytold/photocraft)
 
+![Стартовый экран браузерного редактора PixelCraft Studio Community](docs/screenshots/pixelcraft-studio-home.png)
+
 ## Что добавлено в этом форке
 
 - Автоматическая сборка WebAssembly-версии и публикация браузерной версии на GitHub Pages при обновлении `main`.
