@@ -9,8 +9,7 @@ pub const ORIGINAL: &str = "https://github.com/storytold/photocraft";
 pub const ISSUES: &str = "https://github.com/GhosTnever-lkm/pixelcraft-studio/issues";
 
 /// Help-menu link commands: (id, url). Labels live in `menus::UI_COMMANDS`.
-pub const COMMANDS: &[(&str, &str)] =
-    &[("help.website", GITHUB), ("help.github", GITHUB), ("help.originalProject", ORIGINAL), ("help.reportIssue", ISSUES)];
+pub const COMMANDS: &[(&str, &str)] = &[("help.website", GITHUB), ("help.github", GITHUB), ("help.originalProject", ORIGINAL), ("help.reportIssue", ISSUES)];
 
 pub fn url_for(id: &str) -> Option<&'static str> {
     COMMANDS.iter().find(|c| c.0 == id).map(|c| c.1)
