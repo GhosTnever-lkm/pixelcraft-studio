@@ -1,15 +1,13 @@
-//! Native UI-language preferences, queried once without subprocesses or registry parsing.
+//! System and browser UI-language preferences, queried once without subprocesses or registry parsing.
 
 use super::{Lang, lang_from_tag};
 
-#[cfg(not(target_arch = "wasm32"))]
 const MAX_SYSTEM_TAGS: usize = 64;
-#[cfg(not(target_arch = "wasm32"))]
 const MAX_SYSTEM_TAG_BYTES: usize = 128;
 
-/// Resolve Auto against the current registry. Cache the OS's tags, rather than a language,
+/// Resolve Auto against the current registry. Cache the platform's tags, rather than a language,
 /// so matching remains separate from platform detection.
-/// Missing or unsupported system preferences always resolve to English.
+/// Missing or unsupported platform preferences always resolve to English.
 pub fn system_lang() -> Lang {
     #[cfg(test)]
     {
@@ -26,7 +24,6 @@ fn resolve(tags: &[String]) -> Lang {
     tags.iter().find_map(|tag| lang_from_tag(tag)).unwrap_or(Lang::EN)
 }
 
-#[cfg(not(target_arch = "wasm32"))]
 fn bounded_tags(tags: impl IntoIterator<Item = String>) -> Vec<String> {
     tags.into_iter()
         .take(MAX_SYSTEM_TAGS)
@@ -37,6 +34,12 @@ fn bounded_tags(tags: impl IntoIterator<Item = String>) -> Vec<String> {
         })
         .map(|tag| tag.trim().to_owned())
         .collect()
+}
+
+#[cfg(any(target_arch = "wasm32", test))]
+fn browser_tags(languages: impl IntoIterator<Item = String>, fallback: String) -> Vec<String> {
+    let tags = bounded_tags(languages);
+    if tags.is_empty() { bounded_tags([fallback]) } else { tags }
 }
 
 #[cfg(not(target_arch = "wasm32"))]
@@ -54,7 +57,16 @@ fn detect_system_tags() -> Vec<String> {
 
 #[cfg(all(not(test), target_arch = "wasm32"))]
 fn detect_system_tags() -> Vec<String> {
-    Vec::new()
+    let Some(navigator) = web_sys::window().map(|window| window.navigator()) else {
+        return Vec::new();
+    };
+    // Prefer the full ordered list (e.g. `ru-RU`, then `en-US`), and fall back to
+    // `language` for browsers that do not expose `languages`. Unsupported tags are skipped by
+    // `resolve`, so a user's next supported language can still be selected.
+    browser_tags(
+        navigator.languages().iter().filter_map(|language| language.as_string()),
+        navigator.language(),
+    )
 }
 
 #[cfg(test)]
@@ -109,6 +121,13 @@ mod tests {
             assert_eq!(system_lang().code(), "ko");
         });
         assert_eq!(system_lang(), Lang::EN);
+    }
+
+    #[test]
+    fn ordered_language_preferences_skip_unsupported_tags() {
+        let tags = browser_tags(["xx-XX".into(), "ru-RU".into(), "en-US".into()], "en-US".into());
+        assert_eq!(resolve(&tags).code(), "ru");
+        assert_eq!(browser_tags(Vec::<String>::new(), "ru-RU".into()), ["ru-RU"]);
     }
 
     #[cfg(not(target_arch = "wasm32"))]
