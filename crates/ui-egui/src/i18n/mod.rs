@@ -254,11 +254,13 @@ pub fn language_scope(lang: Lang) -> impl Drop {
 pub fn sync_context(ctx: &egui::Context, language: &str) {
     let lang = Lang::from_pref(language);
     set_current(lang);
+    // Keep assistive technology informed even if the language was selected before this
+    // context's font cache needed an update.
+    sync_document_language(lang);
     let id = egui::Id::new("photocraft-ui-language");
     let changed = ctx.data(|data| data.get_temp::<Lang>(id) != Some(lang));
     if changed {
         ctx.data_mut(|data| data.insert_temp(id, lang));
-        sync_document_language(lang);
         crate::theme::install_fonts(ctx);
         ctx.request_repaint();
     }
