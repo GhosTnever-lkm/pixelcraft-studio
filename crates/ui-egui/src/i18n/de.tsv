@@ -2167,9 +2167,7 @@
 	Lines +/−	Zeilen +/−
 	@{login}: {prs} PRs, {commits} commits, +{added} / −{deleted} lines (Δ {delta}), +{binAdded} / −{binDeleted} binary assets, {first} – {last}	@{login}: {prs} PRs, {commits} Commits, +{added} / −{deleted} Zeilen (Δ {delta}), +{binAdded} / −{binDeleted} Binärdateien, {first} – {last}
 	Original PhotoCraft project	Исходный проект PhotoCraft
-	Live browser demo	Демо в браузере
 	Community fork on GitHub	Форк сообщества на GitHub
-	Original project	Original project
-	Browser demo	Browser demo
-	This fork	This fork
-	Open the community fork on GitHub	Открыть форк сообщества на GitHub
+	Original project	Originalprojekt
+	This fork	Dieser Fork
+	Open the community fork on GitHub	Community-Fork auf GitHub öffnen

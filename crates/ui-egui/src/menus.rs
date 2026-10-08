@@ -53,7 +53,7 @@ pub const UI_COMMANDS: &[(&str, &str, &[&str], Option<&str>)] = &[
     ("window.theme.studioLight", "Studio Light Theme", &["Window", "Theme"], None),
     ("window.theme.classic", "Classic Theme", &["Window", "Theme"], None),
     ("edit.search", "Search…", &["Edit"], Some("Cmd+K")),
-    ("help.website", "Live browser demo", &["Help"], None),
+    ("help.website", "Open the community fork on GitHub", &["Help"], None),
     ("help.github", "Community fork on GitHub", &["Help"], None),
     ("help.originalProject", "Original PhotoCraft project", &["Help"], None),
     ("help.reportIssue", "Report an Issue…", &["Help"], None),

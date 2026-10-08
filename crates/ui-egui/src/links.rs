@@ -4,14 +4,13 @@ use serde_json::{Value, json};
 
 use crate::PhotocraftApp;
 
-pub const APP_PAGE: &str = "https://ghostnever-lkm.github.io/pixelcraft-studio/";
 pub const GITHUB: &str = "https://github.com/GhosTnever-lkm/pixelcraft-studio";
 pub const ORIGINAL: &str = "https://github.com/storytold/photocraft";
 pub const ISSUES: &str = "https://github.com/GhosTnever-lkm/pixelcraft-studio/issues";
 
 /// Help-menu link commands: (id, url). Labels live in `menus::UI_COMMANDS`.
 pub const COMMANDS: &[(&str, &str)] =
-    &[("help.website", APP_PAGE), ("help.github", GITHUB), ("help.originalProject", ORIGINAL), ("help.reportIssue", ISSUES)];
+    &[("help.website", GITHUB), ("help.github", GITHUB), ("help.originalProject", ORIGINAL), ("help.reportIssue", ISSUES)];
 
 pub fn url_for(id: &str) -> Option<&'static str> {
     COMMANDS.iter().find(|c| c.0 == id).map(|c| c.1)
@@ -37,11 +36,11 @@ pub fn original_project_button(app: &mut PhotocraftApp, ui: &mut egui::Ui, min_w
     r
 }
 
-/// The browser demo, this fork and the upstream project as centered links. Clicks route through [`open`] (the
+/// The fork and the upstream project as centered links. Clicks route through [`open`] (the
 /// platform browser service) rather than `ui.hyperlink_to`, which uses the unreliable `ctx.open_url`.
 pub fn link_row(app: &mut PhotocraftApp, ui: &mut egui::Ui) {
     let t = crate::theme::Tokens::get(ui.ctx());
-    let links = [(tl!("Browser demo"), APP_PAGE), (tl!("This fork"), GITHUB), (tl!("Original project"), ORIGINAL)];
+    let links = [(tl!("This fork"), GITHUB), (tl!("Original project"), ORIGINAL)];
     let font = egui::FontId::proportional(12.5);
     let sep = "  ·  ";
     let width: f32 = links.iter().map(|(l, _)| ui.painter().layout_no_wrap((*l).into(), font.clone(), t.text).size().x).sum::<f32>()
@@ -70,7 +69,7 @@ mod tests {
 
     #[test]
     fn links_open_through_the_platform_service() {
-        // Issue #14: links (Help menu, Discord button, start-page links) must open in the browser.
+        // Help-menu and About links must open through the browser service.
         // They route through the `open_url` service rather than the unreliable `ctx.open_url`.
         use std::sync::{Arc, Mutex};
         let opened: Arc<Mutex<Vec<String>>> = Arc::new(Mutex::new(Vec::new()));
@@ -89,7 +88,7 @@ mod tests {
             crate::menus::invoke(&mut app, &ctx, id, json!({})).unwrap();
             assert_eq!(opened.lock().unwrap().last().map(String::as_str), Some(*url), "{id}");
         }
-        // The direct open() helper (Discord button / start-page links) also uses it.
+        // The direct open() helper also routes through the browser service.
         open(&mut app, &ctx, ORIGINAL);
         assert_eq!(opened.lock().unwrap().last().map(String::as_str), Some(ORIGINAL));
     }
@@ -109,7 +108,7 @@ mod tests {
         let mut app = PhotocraftApp::new(photocraft_engine::Session::new(), Default::default());
         let ctx = egui::Context::default();
         for (id, url) in [
-            ("help.website", "https://ghostnever-lkm.github.io/pixelcraft-studio/"),
+            ("help.website", "https://github.com/GhosTnever-lkm/pixelcraft-studio"),
             ("help.github", "https://github.com/GhosTnever-lkm/pixelcraft-studio"),
             ("help.originalProject", "https://github.com/storytold/photocraft"),
         ] {

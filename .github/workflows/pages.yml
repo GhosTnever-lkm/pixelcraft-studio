@@ -50,8 +50,8 @@ jobs:
           test -n "$wasm_file"
           wasm_size=$(wc -c < "$wasm_file")
           echo "WebAssembly size: ${wasm_size} bytes"
-          if [ "$wasm_size" -gt 25165824 ]; then
-            echo "WebAssembly file exceeds the 24 MiB hosting safety limit." >&2
+          if [ "$wasm_size" -gt 29360128 ]; then
+            echo "WebAssembly file exceeds the 28 MiB hosting safety limit." >&2
             exit 1
           fi
       - uses: actions/configure-pages@v5

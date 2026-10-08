@@ -2712,9 +2712,7 @@ cameraRaw	Color	색상
 	Lines +/−	줄 +/−
 	@{login}: {prs} PRs, {commits} commits, +{added} / −{deleted} lines (Δ {delta}), +{binAdded} / −{binDeleted} binary assets, {first} – {last}	@{login}: PR {prs}개, 커밋 {commits}개, 줄 +{added} / −{deleted} (Δ {delta}), 바이너리 +{binAdded} / −{binDeleted}, {first} – {last}
 	Original PhotoCraft project	Исходный проект PhotoCraft
-	Live browser demo	Демо в браузере
 	Community fork on GitHub	Форк сообщества на GitHub
-	Original project	Original project
-	Browser demo	Browser demo
-	This fork	This fork
-	Open the community fork on GitHub	Открыть форк сообщества на GitHub
+	Original project	원본 프로젝트
+	This fork	이 포크
+	Open the community fork on GitHub	GitHub 커뮤니티 포크 열기
