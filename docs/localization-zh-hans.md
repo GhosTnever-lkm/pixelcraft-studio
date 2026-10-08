@@ -20,8 +20,8 @@ languages and the Windows user locale. `zh`, `zh-CN`, `zh-SG` and `zh-Hans`
 variants resolve to this catalog. Traditional Chinese locales (`zh-TW`, `zh-HK`,
 `zh-MO`, `zh-Hant`) resolve to the separate `zh-hant` catalog.
 
-The web build does not detect the browser language automatically; choose the
-language manually there.
+Since version `0.4.0`, the web build checks the browser's preferred languages in order and
+chooses the first one with a translation catalog. A saved manual language choice takes precedence.
 
 ## Files and integration
 

@@ -61,8 +61,9 @@ The native-only, pinned `sys-locale` dependency provides safe Rust access to the
 override falls back to English. Empty overrides use the system. Unix locale variables do not
 override Windows/macOS UI-language preferences. Tags are read once per process (at most 64,
 128 bytes each) and matched against the supported language registry. Changes to the
-OS language list itself take effect at the next launch. The web build keeps its existing
-English Auto fallback until browser-locale detection is implemented.
+OS language list itself take effect at the next launch. Since `0.4.0`, the web build checks
+`navigator.languages` in order and uses the first language with a registered catalog. It falls
+back to `navigator.language`, then English. A saved manual language choice still takes precedence.
 
 API implementation and licensing: [sys-locale](https://github.com/1Password/sys-locale).
 
@@ -90,8 +91,8 @@ Other languages retain the system's CJK fallback preference for document names a
 
 Font files are not added to this repository. Native rendering uses installed system fonts
 and the optional craft-fonts build input; see [Fonts](development.md#fonts-craft-fonts).
-The web build can select every catalog, but CJK glyph delivery and automatic browser-locale
-detection remain separate outstanding work. Switching catalogs does not supply missing fonts.
+The web build can select every catalog and detects its initial language from browser preferences.
+CJK glyph delivery remains separate work. Switching catalogs does not supply missing fonts.
 
 ## Add or maintain a catalog
 
