@@ -1,6 +1,6 @@
 # Roadmap
 
-Status legend: ✅ done · 🟡 in progress · ⬜ not started. Updated 2026-10-07.
+Status legend: ✅ done · 🟡 in progress · ⬜ not started. Code snapshot: 2026-10-08 (`59ea157`); reviewed 2026-10-20.
 
 **Parity metrics.** `cargo xtask parity` measures how much of Photoshop's menu tree is *wired to a
 command* and writes [`parity.md`](parity.md). It does **not** measure whether those commands behave
@@ -26,7 +26,7 @@ readiness; treat it as an upper bound.
 | M11 Automation + formats | 🟡 | MCP (headless + live bridge), batch, Image Processor, prefs over MCP; DoD test passes (10 agent tasks over MCP, `automation/tests/agent_tasks.rs`); since 2026-10-07 the CLI rejects unknown flags and answers `<subcommand> --help`, batch runs report same-name outputs instead of overwriting them, MCP `command_batch` steps can start background jobs, and headless saves never flatten over the opened file; JP2 / DICOM / DPX / C2PA pending |
 | M12 Pro parity | 🟡 | CMYK / Lab / Indexed / Bitmap / Duotone, ICC + soft proofing, channels + Quick Mask, smart-object stack modes, artboards, layer comps; print, HDR, photomerge, timeline pending |
 
-**Menu parity: 532 / 625 (85.1%)** on 2026-10-01, up from 224 (35.8%) the day before. See [`parity.md`](parity.md).
+**Menu wiring: 627 / 627 items (100.0%)** in the generated snapshot [`parity.md`](parity.md). This measures command dispatch only, not Photoshop-equivalent behavior.
 
 ## Honest parity assessment (2026-10-05)
 
@@ -34,14 +34,7 @@ This is the reference answer to "how close are we to Photoshop parity, really". 
 before picking work. Update it (with dated measurements) when the numbers move; don't restate the
 menu-parity number in its place.
 
-**Measured numbers live in the [scorecard](scorecard.md)** (`cargo xtask scorecard`, kept current
-by CI): performance scenarios against their budgets, corpus floors, per-area checklists with
-done / partial / missing counts, and the number of settings that do nothing. Where the scorecard
-and the estimates below disagree, the scorecard's numbers supersede them. As of 2026-10-05 it
-counts 67 of 129 preferences that nothing reads; 3 of the 25 budgeted performance scenarios meet
-their #209–#211 targets (first baseline, taken on a heavily loaded machine), and the 150-layer
-nudge scenario crashes the GPU compositor; the open area issues' checklists (#203–#220) are
-almost entirely missing or partial.
+**Measured numbers live in the [scorecard](scorecard.md)** (`cargo xtask scorecard`, checked by CI): performance scenarios against their budgets, corpus floors, per-area checklists with done / partial / missing counts, and the settings audit. Its current summary reports 57 of 135 settings that do nothing and 3 performance scenarios within budget; the committed performance baseline dates from 2026-10-05. Where this assessment and the scorecard disagree, the scorecard is authoritative. The scorecard and parity files in this repository were last updated with the 2026-10-08 source snapshot.
 
 2026-10-07: UI Font Size now applies to interface text, including CJK fallbacks, independently
 of display and canvas zoom (#532). The current preference audit drops from 59 to 58 unread
