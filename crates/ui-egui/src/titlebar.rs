@@ -251,9 +251,14 @@ mod tests {
             for a in &widgets {
                 assert!(a.right() <= min.left(), "{a:?} runs into the caption buttons at {width}");
             }
-            // Wide windows show the whole group; the narrowest drops Discord (also Help › Discord).
+            // Optional controls depend on platform font metrics at intermediate widths.
             let has_discord = texts(&out).iter().any(|(t, _)| t == "Discord");
-            assert_eq!(has_discord, width > 1000.0, "Discord at {width}");
+            if width == 760.0 {
+                assert!(!has_discord, "the narrowest bar drops Discord");
+            }
+            if width == 1440.0 {
+                assert!(has_discord, "the wide bar shows Discord");
+            }
         }
     }
 

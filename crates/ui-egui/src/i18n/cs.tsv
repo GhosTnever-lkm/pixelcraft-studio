@@ -2133,7 +2133,8 @@ cameraRaw	Color	Barvy
 	Lines +/−	Řádky +/−
 	@{login}: {prs} PRs, {commits} commits, +{added} / −{deleted} lines (Δ {delta}), +{binAdded} / −{binDeleted} binary assets, {first} – {last}	@{login}: PR: {prs}, commity: {commits}, řádky +{added} / −{deleted} (Δ {delta}), binární soubory +{binAdded} / −{binDeleted}, {first} – {last}
 	Original PhotoCraft project	Исходный проект PhotoCraft
-	Community fork on GitHub	Форк сообщества на GitHub
+	Community	Komunita
+	Community fork on GitHub	Komunitní fork na GitHubu
 	Original project	Původní projekt
 	This fork	Tento fork
 	Open the community fork on GitHub	Otevřít komunitní fork na GitHubu
