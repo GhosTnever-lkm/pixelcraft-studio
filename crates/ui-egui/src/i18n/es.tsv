@@ -2205,7 +2205,8 @@ cameraRaw	Amount	Cantidad
 	Lines +/−	Líneas +/−
 	@{login}: {prs} PRs, {commits} commits, +{added} / −{deleted} lines (Δ {delta}), +{binAdded} / −{binDeleted} binary assets, {first} – {last}	@{login}: {prs} PR, {commits} commits, +{added} / −{deleted} líneas (Δ {delta}), +{binAdded} / −{binDeleted} archivos binarios, {first} – {last}
 	Original PhotoCraft project	Исходный проект PhotoCraft
-	Community fork on GitHub	Форк сообщества на GitHub
+	Community	Comunidad
+	Community fork on GitHub	Fork de la comunidad en GitHub
 	Original project	Proyecto original
 	This fork	Este fork
 	Open the community fork on GitHub	Abrir el fork de la comunidad en GitHub
