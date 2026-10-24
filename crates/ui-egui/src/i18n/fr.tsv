@@ -2565,7 +2565,8 @@ cameraRaw	Blending	Fusion
 	Lines +/−	Lignes +/−
 	@{login}: {prs} PRs, {commits} commits, +{added} / −{deleted} lines (Δ {delta}), +{binAdded} / −{binDeleted} binary assets, {first} – {last}	@{login} : {prs} PR, {commits} commits, +{added} / −{deleted} lignes (Δ {delta}), +{binAdded} / −{binDeleted} fichiers binaires, {first} – {last}
 	Original PhotoCraft project	Исходный проект PhotoCraft
-	Community fork on GitHub	Форк сообщества на GitHub
+	Community	Communauté
+	Community fork on GitHub	Fork communautaire sur GitHub
 	Original project	Projet original
 	This fork	Ce fork
 	Open the community fork on GitHub	Ouvrir le fork communautaire sur GitHub

@@ -2142,7 +2142,8 @@ cameraRaw	Blending	混合
 	Lines +/−	行数 +/−
 	@{login}: {prs} PRs, {commits} commits, +{added} / −{deleted} lines (Δ {delta}), +{binAdded} / −{binDeleted} binary assets, {first} – {last}	@{login}：{prs} 个 PR，{commits} 次提交，行 +{added} / −{deleted}（Δ {delta}），二进制文件 +{binAdded} / −{binDeleted}，{first} – {last}
 	Original PhotoCraft project	Исходный проект PhotoCraft
-	Community fork on GitHub	Форк сообщества на GitHub
+	Community	社区
+	Community fork on GitHub	GitHub 上的社区分支
 	Original project	原始项目
 	This fork	此分支
 	Open the community fork on GitHub	在 GitHub 打开社区分支

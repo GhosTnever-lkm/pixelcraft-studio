@@ -2118,7 +2118,7 @@ cameraRaw	Color	カラー
 	@{login}: {prs} PRs, {commits} commits, +{added} / −{deleted} lines (Δ {delta}), +{binAdded} / −{binDeleted} binary assets, {first} – {last}	@{login}: PR {prs} 件、コミット {commits} 件、行 +{added} / −{deleted} (Δ {delta})、バイナリ +{binAdded} / −{binDeleted}、{first} – {last}
 	Original PhotoCraft project	Исходный проект PhotoCraft
 	Community	コミュニティ
-	Community fork on GitHub	Форк сообщества на GitHub
+	Community fork on GitHub	GitHub のコミュニティフォーク
 	Original project	元のプロジェクト
 	This fork	このフォーク
 	Open the community fork on GitHub	GitHub のコミュニティフォークを開く
