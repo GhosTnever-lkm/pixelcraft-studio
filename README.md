@@ -6,6 +6,8 @@
 
 **[Открыть браузерный редактор](https://ghostnever-lkm.github.io/pixelcraft-studio/)** · [Исходный репозиторий](https://github.com/storytold/photocraft)
 
+**Статус версий:** исходный код в `main` — `0.5.0` ([Cargo.toml](Cargo.toml)); последний опубликованный GitHub Release — [`v0.3.1`](https://github.com/GhosTnever-lkm/pixelcraft-studio/releases/tag/v0.3.1), без готовых установщиков. Браузерный редактор доступен по ссылке выше.
+
 ![Стартовый экран браузерного редактора PixelCraft Studio Community](docs/screenshots/pixelcraft-studio-home.png)
 
 ## Что добавлено в этом форке
